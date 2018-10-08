@@ -1,0 +1,22 @@
+{
+    "name": "admin/map_socker",
+    "authors": [
+        {
+            "name": "EvonDu",
+            "email": "298550274@qq.com"
+        }
+    ],
+    "require": {
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.laravel-china.org"
+        }
+    },
+    "autoload":{
+        "psr-4":{
+            "lib\\":"lib/"
+        }
+    }
+}

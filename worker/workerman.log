@@ -1,0 +1,21 @@
+2018-10-08 04:02:21 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\wamp64\www\project\map_socker\server\websocket.php on line 16"
+2018-10-08 04:03:00 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\wamp64\www\project\map_socker\server\websocket.php on line 16"
+2018-10-08 07:07:36 pid:1 Exception: You can't send(NULL) to client, you need to convert it to a string.  in D:\wamp64\www\project\map_socker\worker\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 D:\wamp64\www\project\map_socker\worker\workerman\Connection\TcpConnection.php(336): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 D:\wamp64\www\project\map_socker\lib\BaseWorker.php(110): Workerman\Connection\TcpConnection->send(NULL)
+#2 D:\wamp64\www\project\map_socker\lib\BaseWorker.php(94): lib\BaseWorker->publish(NULL)
+#3 [internal function]: lib\BaseWorker->lib\{closure}(Array)
+#4 D:\wamp64\www\project\map_socker\worker\channel\src\Client.php(126): call_user_func(Object(Closure), Array)
+#5 [internal function]: Channel\Client::onRemoteMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 D:\wamp64\www\project\map_socker\worker\workerman\Connection\TcpConnection.php(650): call_user_func('Channel\\Client:...', Object(Workerman\Connection\AsyncTcpConnection), 'a:2:{s:7:"chann...')
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#8 D:\wamp64\www\project\map_socker\worker\workerman\Events\Select.php(295): call_user_func_array(Array, Array)
+#9 D:\wamp64\www\project\map_socker\worker\workerman\Worker.php(2321): Workerman\Events\Select->loop()
+#10 D:\wamp64\www\project\map_socker\worker\workerman\Worker.php(1315): Workerman\Worker->run()
+#11 D:\wamp64\www\project\map_socker\worker\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#12 D:\wamp64\www\project\map_socker\worker\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#13 D:\wamp64\www\project\map_socker\lib\BaseWorker.php(103): Workerman\Worker::runAll()
+#14 D:\wamp64\www\project\map_socker\server\websocket.php(27): lib\BaseWorker::runAll()
+#15 {main}
+2018-10-08 07:07:36 pid:1 Worker process terminated
