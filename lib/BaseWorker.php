@@ -18,6 +18,7 @@ Class BaseWorker{
     private $__onWorkerStopEvents = [];
     private $__onMessageEvents = [];
     private $__onPublishEvents = [];
+    private $__onRequestEvents = [];
 
     //构造函数
     public function __construct($socket_name){
@@ -84,6 +85,9 @@ Class BaseWorker{
     public function addOnPublishEvents($function){
         $this->__onPublishEvents[] = $function;
     }
+    public function addOnRequestEvents($function){
+        $this->__onRequestEvents[] = $function;
+    }
 
     //监听信道
     public function listenChannel($ip = "127.0.0.1",$prot = 2206){
@@ -94,10 +98,17 @@ Class BaseWorker{
         $channel = function($worker)use($self,$ip,$prot){
             //建立连接
             Client::connect($ip, $prot);
-            //事件处理
+            //事件处理:消息发布
             Client::on("publish", function($event_data)use($self){
-                //发布信息（群发）
-                $self->publish($event_data["content"]);
+                //发布信息(群发), 并触发事件
+                $self->publish($event_data);
+            });
+            //事件处理:服务请求
+            Client::on("request", function($event_data)use($self){
+                //触发事件
+                foreach ($this->__onRequestEvents as $event){
+                    $event($this->worker,$event_data);
+                }
             });
         };
         //添加到事件列表：onConnectEvents
@@ -109,7 +120,7 @@ Class BaseWorker{
         Worker::runAll();
     }
 
-    //发布信息（群发）
+    //发布信息(群发), 并触发事件
     public function publish($msg){
         //群发信息
         foreach($this->worker->connections as $connection) {
