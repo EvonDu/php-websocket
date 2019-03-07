@@ -5,11 +5,17 @@ require_once __DIR__ . '/../worker/workerman/Autoloader.php';
 require_once __DIR__ . '/../worker/channel/src/Client.php';
 
 use Workerman\Worker;
-use Channel\Client;
 
+/**
+ * Class BaseWorker
+ * @property \Workerman\Worker $worker
+ * @property \GlobalData\Client $global
+ *
+ */
 Class BaseWorker{
     //Worker服务
     private $worker;
+    public $global;
 
     //定义事件
     private $__onConnectEvents = [];
@@ -52,8 +58,9 @@ Class BaseWorker{
         foreach ($this->__onWorkerStartEvents as $event){
             $event($worker);
         }
-
-        $this->listenChannel();
+        //监听组件
+        //$this->listenChannel();
+        //$this->listenGlobalData();
     }
     public function onWorkerStop($connection){
         foreach ($this->__onWorkerStopEvents as $event){
@@ -97,14 +104,14 @@ Class BaseWorker{
         //创建一个回调函数
         $channel = function($worker)use($self,$ip,$prot){
             //建立连接
-            Client::connect($ip, $prot);
+            \Channel\Client::connect($ip, $prot);
             //事件处理:消息发布
-            Client::on("publish", function($event_data)use($self){
+            \Channel\Client::on("publish", function($event_data)use($self){
                 //发布信息(群发), 并触发事件
                 $self->publish($event_data);
             });
             //事件处理:服务请求
-            Client::on("request", function($event_data)use($self){
+            \Channel\Client::on("request", function($event_data)use($self){
                 //触发事件
                 foreach ($this->__onRequestEvents as $event){
                     $event($this->worker,$event_data);
@@ -113,6 +120,12 @@ Class BaseWorker{
         };
         //添加到事件列表：onConnectEvents
         $this->addOnWorkerStartEvents($channel);
+    }
+
+    //共享数据
+    public function listenGlobalData($ip = "127.0.0.1", $prot = 2207){
+        //定义this
+        $this->global = new \GlobalData\Client("$ip:$prot");
     }
 
     //外部函数
