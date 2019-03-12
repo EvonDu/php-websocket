@@ -2,7 +2,6 @@
 namespace lib;
 
 require_once __DIR__ . '/../worker/workerman/Autoloader.php';
-require_once __DIR__ . '/../worker/channel/src/Client.php';
 
 use Workerman\Worker;
 

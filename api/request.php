@@ -14,7 +14,6 @@
 
 //引入依赖
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../worker/channel/src/Client.php';
 
 //引入配置
 $config = require_once __DIR__ . '/../config/main.php';

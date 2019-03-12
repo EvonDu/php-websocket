@@ -1,7 +1,6 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../worker/workerman/Autoloader.php';
-require_once __DIR__ . '/../worker/channel/src/Server.php';
-require_once __DIR__ . '/../worker/channel/src/Client.php';
 
 use Channel\Server;
 use Workerman\Worker;
