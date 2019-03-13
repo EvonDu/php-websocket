@@ -1,8 +1,6 @@
 <?php
 namespace lib;
 
-require_once __DIR__ . '/../worker/workerman/Autoloader.php';
-
 use Workerman\Worker;
 
 /**
