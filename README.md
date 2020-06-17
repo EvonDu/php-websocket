@@ -22,3 +22,12 @@
 ### 测试页面
 * 客户端：`test/client.php`
 * 发送端：`test/server.php`
+
+### 命令行发布事件
+* 执行方法：`php cmd.php <事件> <消息>`
+    * 例子：`php cmd.php publish "Hello Word!"`
+    
+### 项目配置
+##### 本地化配置
+* 创建`config/main-local.php`
+* 然后参考`config/main.php`进行配置

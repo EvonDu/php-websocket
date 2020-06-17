@@ -11,12 +11,6 @@
         "workerman/channel": "^1.0",
         "workerman/globaldata": "^1.0"
     },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.laravel-china.org"
-        }
-    },
     "autoload":{
         "psr-4":{
             "lib\\":"lib/"

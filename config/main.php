@@ -1,5 +1,9 @@
 <?php
-return [
+//尝试读取本地配置
+$config_local = file_exists(__DIR__.'/main-local.php') ? require(__DIR__.'/main-local.php') : [];
+
+//返回配置内容
+return array_merge([
     //配置WebSocket服务
     "websocket_ip"=>"0.0.0.0",
     "websocket_port"=>2000,
@@ -14,4 +18,4 @@ return [
 
     //配置日志文件夹
     "log_dir"=>"logs/"
-];
+], $config_local);
